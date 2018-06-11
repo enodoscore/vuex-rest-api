@@ -21,7 +21,7 @@
   },
   "scripts": {
     "build": "tsc -p .",
-    "pub": "./node_modules/.bin/np || true"
+    "pub": "./node_modules/.bin/np --any-branch || true"
   },
   "devDependencies": {
     "typescript": "2.7.x"
