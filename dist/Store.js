@@ -110,8 +110,12 @@ var StoreCreator = /** @class */ (function () {
         var actions = this.resource.actions;
         Object.keys(actions).forEach(function (action) {
             var _a = actions[action], property = _a.property, commitString = _a.commitString, onSuccess = _a.onSuccess, onError = _a.onError, axios = _a.axios;
-            mutations["" + commitString] = function (state) {
+            mutations["" + commitString] = function (state, payload) {
+                if (payload === void 0) { payload = null; }
                 if (property !== null) {
+                    if (payload && payload.data) {
+                        state[property] = payload.data;
+                    }
                     state.pending[property] = true;
                     state.error[property] = null;
                 }
@@ -160,7 +164,7 @@ var StoreCreator = /** @class */ (function () {
                             actionParams.params = {};
                         if (!actionParams.data)
                             actionParams.data = {};
-                        commit(commitString);
+                        commit(commitString, { data: actionParams.data });
                         return [2 /*return*/, requestFn(actionParams.params, actionParams.data)
                                 .then(function (response) {
                                 commit(commitString + "_" + _this.successSuffix, response);

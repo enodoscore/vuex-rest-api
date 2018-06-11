@@ -6,16 +6,22 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/christianmalek/vuex-rest-api"
+    "url": "https://github.com/enodoscore/vuex-rest-api"
+  },
+  "publishConfig": {
+    "registry": "http://52.165.21.157:4873"
   },
   "dependencies": {
-    "lodash.clonedeep": "4.5.x"
+    "axios": "^0.18.0",
+    "lodash.clonedeep": "4.5.x",
+    "np": "2.18.3"
   },
   "peerDependencies": {
     "axios": "0.18.x"
   },
   "scripts": {
-    "build": "tsc -p ."
+    "build": "tsc -p .",
+    "pub": "./node_modules/.bin/np || true"
   },
   "devDependencies": {
     "typescript": "2.7.x"
