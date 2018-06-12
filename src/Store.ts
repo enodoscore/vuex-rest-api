@@ -99,6 +99,7 @@ class StoreCreator {
         // if state is undefined set default value to null
         if (state[property] === undefined) {
           state[property] = null
+          state[`${property}_prev`] = null
         }
 
         state["pending"][property] = false
@@ -124,6 +125,7 @@ class StoreCreator {
 
         if (property !== null) {
           if (payload && payload.data) {
+            state[`${property}_prev`] = state[property]
             state[property] = payload.data
           }
           state.pending[property] = true
@@ -140,6 +142,7 @@ class StoreCreator {
         if (onSuccess) {
           onSuccess(state, payload, axios)
         } else if (property !== null) {
+          state[`${property}_prev`] = state[property]
           state[property] = payload.data
         }
       }
@@ -155,7 +158,7 @@ class StoreCreator {
         } else if (property !== null) {
 
           // sets property to it's default value in case of an error
-          state[property] = defaultState[property]
+          state[property] = state[`${property}_prev`]
         }
       }
     })
