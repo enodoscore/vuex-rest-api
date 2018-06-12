@@ -69,6 +69,7 @@ class StoreCreator {
       // if state is undefined set default value to null
       if (state[property] === undefined) {
         state[property] = null
+        state[`${property}_prev`] = null
       }
 
       state["pending"][property] = false
