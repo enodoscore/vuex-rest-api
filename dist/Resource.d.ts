@@ -7,6 +7,7 @@ export interface ResourceAction {
     dispatchString: string;
     commitString: string;
     axios: AxiosInstance;
+    autoCommit: boolean;
 }
 export interface ResourceActionMap {
     [action: string]: ResourceAction;
@@ -19,6 +20,7 @@ export interface ShorthandResourceActionOptions {
     onError?: Function;
     requestConfig?: Object;
     queryParams?: Boolean;
+    autoCommit?: boolean;
 }
 export interface ResourceActionOptions extends ShorthandResourceActionOptions {
     method: string;

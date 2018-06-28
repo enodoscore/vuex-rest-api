@@ -1,13 +1,14 @@
 import axios, { AxiosInstance } from "axios"
 
 export interface ResourceAction {
-  requestFn: Function,
-  onSuccess: Function,
-  onError: Function,
-  property: string,
-  dispatchString: string,
-  commitString: string,
-  axios: AxiosInstance,
+  requestFn: Function
+  onSuccess: Function
+  onError: Function
+  property: string
+  dispatchString: string
+  commitString: string
+  axios: AxiosInstance
+  autoCommit: boolean
 }
 
 export interface ResourceActionMap {
@@ -22,6 +23,7 @@ export interface ShorthandResourceActionOptions {
   onError?: Function
   requestConfig?: Object
   queryParams?: Boolean
+  autoCommit?: boolean
 }
 
 export interface ResourceActionOptions extends ShorthandResourceActionOptions {
@@ -105,7 +107,8 @@ export class Resource {
       onError: options.onError,
       dispatchString: this.getDispatchString(options.action),
       commitString: this.getCommitString(options.action),
-      axios: this.axios
+      axios: this.axios,
+      autoCommit: options.autoCommit
     }
 
     return this

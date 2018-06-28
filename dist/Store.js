@@ -111,11 +111,11 @@ var StoreCreator = /** @class */ (function () {
         var mutations = {};
         var actions = this.resource.actions;
         Object.keys(actions).forEach(function (action) {
-            var _a = actions[action], property = _a.property, commitString = _a.commitString, onSuccess = _a.onSuccess, onError = _a.onError, axios = _a.axios;
+            var _a = actions[action], property = _a.property, commitString = _a.commitString, onSuccess = _a.onSuccess, onError = _a.onError, axios = _a.axios, autoCommit = _a.autoCommit;
             mutations["" + commitString] = function (state, payload) {
                 if (payload === void 0) { payload = null; }
                 if (property !== null) {
-                    if (payload && payload.data) {
+                    if (payload && payload.data && autoCommit === false) {
                         state[property + "_prev"] = state[property];
                         state[property] = payload.data;
                     }

@@ -120,12 +120,12 @@ class StoreCreator {
 
     const actions = this.resource.actions
     Object.keys(actions).forEach((action) => {
-      const { property, commitString, onSuccess, onError, axios } = actions[action]
+      const { property, commitString, onSuccess, onError, axios, autoCommit } = actions[action]
 
       mutations[`${commitString}`] = (state, payload = null) => {
 
         if (property !== null) {
-          if (payload && payload.data) {
+          if (payload && payload.data && autoCommit === false) {
             state[`${property}_prev`] = state[property]
             state[property] = payload.data
           }
