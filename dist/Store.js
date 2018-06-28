@@ -115,7 +115,7 @@ var StoreCreator = /** @class */ (function () {
             mutations["" + commitString] = function (state, payload) {
                 if (payload === void 0) { payload = null; }
                 if (property !== null) {
-                    if (payload && payload.data && autoCommit === false) {
+                    if (payload && payload.data && autoCommit) {
                         state[property + "_prev"] = state[property];
                         state[property] = payload.data;
                     }
