@@ -65,7 +65,7 @@ var Resource = /** @class */ (function () {
             dispatchString: this.getDispatchString(options.action),
             commitString: this.getCommitString(options.action),
             axios: this.axios,
-            autoCommit: options.autoCommit || true
+            autoCommit: options.autoCommit
         };
         return this;
     };
