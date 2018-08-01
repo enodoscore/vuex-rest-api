@@ -178,7 +178,6 @@ class StoreCreator {
         if (!actionParams.params)
           actionParams.params = {}
         if (!actionParams.data) {
-          actionParams.data = {}
           commit(commitString)
         } else {
           commit(commitString, { data: actionParams.data })
