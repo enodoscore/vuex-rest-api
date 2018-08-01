@@ -177,10 +177,13 @@ class StoreCreator {
       storeActions[dispatchString] = async ({ commit }, actionParams: ActionParamsBody = { params: {}, data: {} }) => {
         if (!actionParams.params)
           actionParams.params = {}
-        if (!actionParams.data)
+        if (!actionParams.data) {
           actionParams.data = {}
-
-        commit(commitString, { data: actionParams.data})
+          commit(commitString)
+        } else {
+          commit(commitString, { data: actionParams.data })
+        }
+        
         return requestFn(actionParams.params, actionParams.data)
           .then((response) => {
             commit(`${commitString}_${this.successSuffix}`, response)
