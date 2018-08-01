@@ -123,7 +123,6 @@ class StoreCreator {
       const { property, commitString, onSuccess, onError, axios, autoCommit } = actions[action]
 
       mutations[`${commitString}`] = (state, payload = null) => {
-
         if (property !== null) {
           if (payload && payload.data && autoCommit) {
             state[`${property}_prev`] = state[property]
@@ -174,7 +173,7 @@ class StoreCreator {
     Object.keys(actions).forEach((action) => {
       const { dispatchString, commitString, requestFn } = actions[action]
 
-      storeActions[dispatchString] = async ({ commit }, actionParams: ActionParamsBody) => {
+      storeActions[dispatchString] = async ({ commit }, actionParams: ActionParamsBody = { params: {}, data: null }) => {
         if (!actionParams.params)
           actionParams.params = {}
         if (!actionParams.data)
