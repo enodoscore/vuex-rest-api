@@ -2,6 +2,12 @@
 
 (format is `dd.mm.yyyy`)
 
+### 2.8.0 (04.07.2018)
+- adding support for providing dynamic headers to requests (contributed by @rmaclean-ee, see https://github.com/christianmalek/vuex-rest-api/pull/66)
+
+### 2.7.1 (03.07.2018)
+- 🐛 fixed broken typescript definition for the `Store` interface. `Store.state` is now properly declared as `Object | Function` (see https://github.com/christianmalek/vuex-rest-api/issues/67).
+
 ### 2.7.0 (10.04.2018)
 - 🐛 if `axios.defaults.baseURL` was set and it was no absolute URL it was appended twice (see https://github.com/christianmalek/vuex-rest-api/issues/60). See *baseURL from the constructor's options parameter in the README* for more info.
 

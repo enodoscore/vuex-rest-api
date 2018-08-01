@@ -21,6 +21,7 @@ export interface ShorthandResourceActionOptions {
     requestConfig?: Object;
     queryParams?: Boolean;
     autoCommit?: boolean;
+    headers?: Function | Object;
 }
 export interface ResourceActionOptions extends ShorthandResourceActionOptions {
     method: string;
@@ -40,6 +41,7 @@ export declare class Resource {
     private queryParams;
     constructor(options: ResourceOptions);
     add(options: ResourceActionOptions): Resource;
+    private getHeadersFn(options);
     private readonly normalizedBaseURL;
     private getDispatchString(action);
     private getCommitString(action);

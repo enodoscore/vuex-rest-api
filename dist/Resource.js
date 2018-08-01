@@ -16,6 +16,7 @@ var Resource = /** @class */ (function () {
         options.method = options.method || "get";
         options.requestConfig = options.requestConfig || {};
         options.property = options.property || null;
+        var headersFn = this.getHeadersFn(options);
         if (this.HTTPMethod.indexOf(options.method) === -1) {
             var methods = this.HTTPMethod.join(", ");
             throw new Error("Illegal HTTP method set. Following methods are allowed: " + methods + ". You chose \"" + options.method + "\".");
@@ -47,6 +48,14 @@ var Resource = /** @class */ (function () {
                 if (queryParams || paramsSerializer) {
                     requestConfig["params"] = params;
                 }
+                if (headersFn) {
+                    if (requestConfig["headers"]) {
+                        Object.assign(requestConfig["headers"], headersFn(params));
+                    }
+                    else {
+                        requestConfig["headers"] = headersFn(params);
+                    }
+                }
                 // This is assignment is made to respect the priority of the base URL
                 // It is as following: baseURL > axios instance base URL > request config base URL
                 var requestConfigWithProperBaseURL = Object.assign({
@@ -68,6 +77,18 @@ var Resource = /** @class */ (function () {
             autoCommit: !(options.autoCommit === false)
         };
         return this;
+    };
+    Resource.prototype.getHeadersFn = function (options) {
+        if (options.headers) {
+            if (typeof options.headers === "function") {
+                var headersFunction_1 = options.headers;
+                return function (params) { return headersFunction_1(params); };
+            }
+            else {
+                return function () { return options.headers; };
+            }
+        }
+        return null;
     };
     Object.defineProperty(Resource.prototype, "normalizedBaseURL", {
         get: function () {
