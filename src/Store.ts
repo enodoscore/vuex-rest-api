@@ -174,15 +174,13 @@ class StoreCreator {
     Object.keys(actions).forEach((action) => {
       const { dispatchString, commitString, requestFn } = actions[action]
 
-      storeActions[dispatchString] = async ({ commit }, actionParams: ActionParamsBody = { params: {}, data: null }) => {
+      storeActions[dispatchString] = async ({ commit }, actionParams: ActionParamsBody) => {
         if (!actionParams.params)
           actionParams.params = {}
-        if (!actionParams.data) {
-          commit(commitString)
-        } else {
-          commit(commitString, { data: actionParams.data })
-        }
-        
+        if (!actionParams.data)
+          actionParams.data = null
+
+        commit(commitString, { data: actionParams.data})
         return requestFn(actionParams.params, actionParams.data)
           .then((response) => {
             commit(`${commitString}_${this.successSuffix}`, response)

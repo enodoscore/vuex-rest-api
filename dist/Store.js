@@ -160,18 +160,14 @@ var StoreCreator = /** @class */ (function () {
             var _a = actions[action], dispatchString = _a.dispatchString, commitString = _a.commitString, requestFn = _a.requestFn;
             storeActions[dispatchString] = function (_a, actionParams) {
                 var commit = _a.commit;
-                if (actionParams === void 0) { actionParams = { params: {}, data: null }; }
                 return __awaiter(_this, void 0, void 0, function () {
                     var _this = this;
                     return __generator(this, function (_b) {
                         if (!actionParams.params)
                             actionParams.params = {};
-                        if (!actionParams.data) {
-                            commit(commitString);
-                        }
-                        else {
-                            commit(commitString, { data: actionParams.data });
-                        }
+                        if (!actionParams.data)
+                            actionParams.data = null;
+                        commit(commitString, { data: actionParams.data });
                         return [2 /*return*/, requestFn(actionParams.params, actionParams.data)
                                 .then(function (response) {
                                 commit(commitString + "_" + _this.successSuffix, response);
