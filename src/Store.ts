@@ -174,7 +174,7 @@ class StoreCreator {
     Object.keys(actions).forEach((action) => {
       const { dispatchString, commitString, requestFn } = actions[action]
 
-      storeActions[dispatchString] = async ({ commit }, actionParams: ActionParamsBody = { params: {}, data: {} }) => {
+      storeActions[dispatchString] = async ({ commit }, actionParams: ActionParamsBody = { params: {}, data: null }) => {
         if (!actionParams.params)
           actionParams.params = {}
         if (!actionParams.data) {
